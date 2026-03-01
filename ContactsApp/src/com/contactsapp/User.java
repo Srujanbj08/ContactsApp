@@ -96,4 +96,12 @@ public class User {
         }
         return null;
     }
+
+    // Replace old contact with updated contact
+    public void updateContact(Contact oldContact, Contact newContact) {
+        int index = contacts.indexOf(oldContact);
+        if (index != -1) {
+            contacts.set(index, newContact);
+        }
+    }
 }

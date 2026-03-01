@@ -5,20 +5,19 @@ public class Contact {
     private String contactName;
     private String phoneNumber;
 
+    // Constructor
     public Contact(String contactName, String phoneNumber) {
-
-        if (contactName == null || contactName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Contact name cannot be empty.");
-        }
-
-        if (phoneNumber == null || !phoneNumber.matches("\\d{10}")) {
-            throw new IllegalArgumentException("Phone number must be 10 digits.");
-        }
-
-        this.contactName = contactName;
-        this.phoneNumber = phoneNumber;
+        setContactName(contactName);
+        setPhoneNumber(phoneNumber);
     }
 
+    // Copy constructor
+    public Contact(Contact other) {
+        this.contactName = other.contactName;
+        this.phoneNumber = other.phoneNumber;
+    }
+
+    // Getter methods
     public String getContactName() {
         return contactName;
     }
@@ -27,9 +26,25 @@ public class Contact {
         return phoneNumber;
     }
 
-    // Display full contact details
+    // Setter with validation
+    public void setContactName(String contactName) {
+        if (contactName == null || contactName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Contact name cannot be empty.");
+        }
+        this.contactName = contactName;
+    }
+
+    // Setter with validation
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || !phoneNumber.matches("\\d{10}")) {
+            throw new IllegalArgumentException("Phone number must be 10 digits.");
+        }
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
-        return "Contact Name: " + contactName + "\nPhone Number: " + phoneNumber;
+        return "Contact Name: " + contactName +
+               "\nPhone Number: " + phoneNumber;
     }
 }

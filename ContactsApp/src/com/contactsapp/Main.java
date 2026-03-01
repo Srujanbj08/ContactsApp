@@ -50,7 +50,8 @@ public class Main {
                 System.out.println("1. Profile Management");
                 System.out.println("2. Add Contact");
                 System.out.println("3. View Contact");
-                System.out.println("4. Exit");
+                System.out.println("4. Edit Contact");
+                System.out.println("5. Exit");
                 System.out.print("Choose option: ");
 
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -126,8 +127,42 @@ public class Main {
                         System.out.println("Contact not found.");
                     }
                 }
-
+                // Edit Contact
                 else if (choice == 4) {
+
+                    System.out.print("Enter Contact Name to Edit: ");
+                    String searchName = scanner.nextLine();
+
+                    Contact existing = loggedInUser.getContactByName(searchName);
+
+                    if (existing != null) {
+
+                        try {
+                            System.out.print("Enter New Contact Name: ");
+                            String newName = scanner.nextLine();
+
+                            System.out.print("Enter New Phone Number: ");
+                            String newPhone = scanner.nextLine();
+
+                            // Create updated copy
+                            Contact updatedContact = new Contact(existing);
+                            updatedContact.setContactName(newName);
+                            updatedContact.setPhoneNumber(newPhone);
+
+                            loggedInUser.updateContact(existing, updatedContact);
+
+                            System.out.println("Contact Updated Successfully!");
+
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                }
+
+                else if (choice == 5) {
                     break; // Exit application
                 }
 
