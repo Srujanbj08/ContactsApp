@@ -2,17 +2,27 @@ package com.contactsapp;
 
 public class SessionManager {
 
-    // Stores current logged-in user
+    // Stores logged-in user
     private User currentUser;
 
-    // Start user session
+    // Start session
     public void startSession(User user) {
-        currentUser = user;
+        this.currentUser = user;
         System.out.println("Login Successful! Welcome " + user.getName());
     }
 
-    // Check if user is logged in
+    // Check login status
     public boolean isLoggedIn() {
         return currentUser != null;
+    }
+
+    // Get Current user
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    // Logout user
+    public void logout() {
+        currentUser = null;
     }
 }

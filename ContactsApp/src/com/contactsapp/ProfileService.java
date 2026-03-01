@@ -8,7 +8,7 @@ public class ProfileService {
         System.out.println("Name updated successfully.");
     }
 
-    // Update user email
+    // Update User email
     public void updateEmail(User user, String newEmail) {
         user.setEmail(newEmail);
         System.out.println("Email updated successfully.");

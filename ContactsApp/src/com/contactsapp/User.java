@@ -57,13 +57,13 @@ public class User {
         this.passwordHash = hashPassword(newPassword); // Hash password
     }
 
-    // Validate email
+    // Validate Email
     private boolean isValidEmail(String email) {
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
         return Pattern.matches(regex, email);
     }
 
-    // Hash password using SHA-256
+    // Hash Password using SHA-256
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashBytes = md.digest(password.getBytes());
