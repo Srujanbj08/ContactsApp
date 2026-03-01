@@ -1,23 +1,21 @@
-MyContacts App
+📱 MyContacts App
 Java Console-Based Contact Management System
-Overview
+📌 Overview
 
 MyContacts App is a Java-based console application developed to demonstrate Object-Oriented Programming (OOP) principles and core Java concepts through a contact management system.
 
 The application supports user management, contact operations, tagging, searching, filtering, and bulk processing.
 
-Features
-User Management
+🚀 Features
+👤 User Management
 
 User Registration with email validation
 
 Secure password hashing (SHA-256)
 
-User Login
+User Login & Profile Management
 
-Profile Management
-
-Contact Management
+📇 Contact Management
 
 Add new contacts
 
@@ -27,23 +25,19 @@ Edit contact information
 
 Delete contacts (with confirmation)
 
-Bulk delete
+Bulk delete, bulk tag, export contacts
 
-Bulk tag
-
-Export contacts
-
-Tag Management
+🏷 Tag Management
 
 Create custom tags
 
-Apply single or multiple tags
+Apply single or multiple tags to contacts
 
 Remove tags from contacts
 
 Unique tag handling using Set
 
-Search & Filter
+🔎 Search & Filter
 
 Search by name, phone, or tag
 
@@ -51,7 +45,7 @@ Filter by tag, date added, frequently contacted
 
 Sorting using Comparator
 
-OOP Concepts Used
+🧱 OOP Concepts Used
 
 Encapsulation – Private fields with validation methods
 
@@ -61,7 +55,7 @@ Polymorphism – Search and Filter implementations
 
 Abstraction – Interfaces for search and filtering
 
-Core Java Concepts Used
+💻 Core Java Concepts Used
 
 Collections (List, Set)
 
@@ -79,7 +73,7 @@ Regular expressions for validation
 
 MessageDigest for password hashing
 
-Relationships
+🔗 Relationships
 
 User manages multiple Contacts
 
@@ -87,7 +81,7 @@ Contact has multiple Tags (many-to-many relationship)
 
 Contact contains PhoneNumber and Email objects
 
-How to Run
+▶️ How to Run
 
 Open project in Eclipse / IntelliJ
 
@@ -95,7 +89,7 @@ Run Main.java
 
 Follow console prompts
 
-Purpose
+🎓 Purpose
 
 This project demonstrates practical implementation of:
 
