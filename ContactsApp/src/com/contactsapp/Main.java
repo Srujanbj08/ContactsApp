@@ -53,7 +53,8 @@ public class Main {
 				System.out.println("4. Edit Contact");
 				System.out.println("5. Delete Contact");
 				System.out.println("6. Bulk Operations");
-				System.out.println("7. Exit");
+				System.out.println("8. Search Contacts");
+				System.out.println("9. Exit");
 				System.out.print("Choose option: ");
 
 				int choice = Integer.parseInt(scanner.nextLine());
@@ -246,8 +247,50 @@ public class Main {
 						}
 					}
 				}
-
 				else if (choice == 7) {
+
+					System.out.println("Search by:");
+					System.out.println("1. Name");
+					System.out.println("2. Phone");
+					System.out.println("3. Tag");
+					System.out.print("Choose option: ");
+
+					int searchChoice = Integer.parseInt(scanner.nextLine());
+
+					System.out.print("Enter search keyword: ");
+					String keyword = scanner.nextLine();
+
+					ContactSearch searchStrategy = null;
+
+					if (searchChoice == 1) {
+						searchStrategy = new SearchByName();
+					}
+
+					else if (searchChoice == 2) {
+						searchStrategy = new SearchByPhone();
+					}
+
+					else if (searchChoice == 3) {
+						searchStrategy = new SearchByTag();
+					}
+
+					if (searchStrategy != null) {
+
+						List<Contact> results =
+								searchStrategy.search(loggedInUser.getContacts(), keyword);
+
+						if (results.isEmpty()) {
+							System.out.println("No contacts found.");
+						} else {
+							for (Contact contact : results) {
+								System.out.println(contact);
+								System.out.println("----------------");
+							}
+						}
+					}
+				}
+
+				else if (choice == 8) {
 					break; // Exit application
 				}
 
