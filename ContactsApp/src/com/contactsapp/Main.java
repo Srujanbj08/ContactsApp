@@ -8,13 +8,10 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        // Input scanner
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); // Scanner for input
+        List<User> registeredUsers = new ArrayList<>(); // List to store users
 
-        // Store Registered users
-        List<User> registeredUsers = new ArrayList<>();
-
-        // ================= UC-01 REGISTER =================
+        // UC-01 Register
         System.out.println("=== REGISTER FIRST ===");
         System.out.print("Enter Name: ");
         String name = scanner.nextLine();
@@ -25,13 +22,12 @@ public class Main {
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
-        // Add new user
-        registeredUsers.add(new User(name, email, password));
+        registeredUsers.add(new User(name, email, password)); // Create user
         System.out.println("Registration Successful!\n");
 
-        // ================= UC-02 LOGIN =================
-        LoginService loginService = new LoginService(registeredUsers);
-        SessionManager session = new SessionManager();
+        // UC-02 Login
+        LoginService loginService = new LoginService(registeredUsers); // Login service
+        SessionManager session = new SessionManager(); // Session manager
 
         System.out.println("=== LOGIN ===");
         System.out.print("Enter Email: ");
@@ -40,52 +36,87 @@ public class Main {
         System.out.print("Enter Password: ");
         String loginPassword = scanner.nextLine();
 
-        // Attempt login
-        User loggedInUser = loginService.login(loginEmail, loginPassword);
+        User loggedInUser = loginService.login(loginEmail, loginPassword); // Validate login
 
         if (loggedInUser != null) {
 
             session.startSession(loggedInUser); // Start session
-
-            // ================= UC-03 PROFILE MANAGEMENT =================
-            ProfileService profileService = new ProfileService();
+            ProfileService profileService = new ProfileService(); // Profile service
 
             while (true) {
 
-                // Profile menu
-                System.out.println("\n=== PROFILE MENU ===");
-                System.out.println("1. Update Name");
-                System.out.println("2. Update Email");
-                System.out.println("3. Change Password");
-                System.out.println("4. Exit");
+                // Main menu
+                System.out.println("\n=== MAIN MENU ===");
+                System.out.println("1. Profile Management");
+                System.out.println("2. Add Contact");
+                System.out.println("3. Exit");
                 System.out.print("Choose option: ");
 
                 int choice = Integer.parseInt(scanner.nextLine());
 
+                // Profile management
                 if (choice == 1) {
-                    // Update name
-                    System.out.print("Enter New Name: ");
-                    profileService.updateName(loggedInUser, scanner.nextLine());
+
+                    while (true) {
+
+                        System.out.println("\n=== PROFILE MENU ===");
+                        System.out.println("1. Update Name");
+                        System.out.println("2. Update Email");
+                        System.out.println("3. Change Password");
+                        System.out.println("4. Back");
+                        System.out.print("Choose option: ");
+
+                        int profileChoice = Integer.parseInt(scanner.nextLine());
+
+                        if (profileChoice == 1) {
+                            System.out.print("Enter New Name: ");
+                            profileService.updateName(loggedInUser, scanner.nextLine()); // Update name
+                        }
+
+                        else if (profileChoice == 2) {
+                            System.out.print("Enter New Email: ");
+                            profileService.updateEmail(loggedInUser, scanner.nextLine()); // Update email
+                        }
+
+                        else if (profileChoice == 3) {
+                            System.out.print("Enter New Password: ");
+                            profileService.changePassword(loggedInUser, scanner.nextLine()); // Update password
+                        }
+
+                        else if (profileChoice == 4) {
+                            break; // Exit profile menu
+                        }
+
+                        else {
+                            System.out.println("Invalid Option!");
+                        }
+                    }
                 }
 
+                // Create contact
                 else if (choice == 2) {
-                    // Update email
-                    System.out.print("Enter New Email: ");
-                    profileService.updateEmail(loggedInUser, scanner.nextLine());
+
+                    try {
+                        System.out.print("Enter Contact Name: ");
+                        String cname = scanner.nextLine();
+
+                        System.out.print("Enter Phone Number: ");
+                        String phone = scanner.nextLine();
+
+                        loggedInUser.addContact(new Contact(cname, phone)); // Add contact
+                        System.out.println("Contact Added Successfully!");
+
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Error: " + e.getMessage()); // Validation error
+                    }
                 }
 
                 else if (choice == 3) {
-                    // Change password
-                    System.out.print("Enter New Password: ");
-                    profileService.changePassword(loggedInUser, scanner.nextLine());
-                }
-
-                else if (choice == 4) {
-                    break; // Exit menu
+                    break; // Exit application
                 }
 
                 else {
-                    System.out.println("Invalid Option!"); // Invalid choice
+                    System.out.println("Invalid Option!");
                 }
             }
 
@@ -93,7 +124,6 @@ public class Main {
             System.out.println("Invalid Email or Password!"); // Login failed
         }
 
-        // Close scanner
-        scanner.close();
+        scanner.close(); // Close scanner
     }
 }
