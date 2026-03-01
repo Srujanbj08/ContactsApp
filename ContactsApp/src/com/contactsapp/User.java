@@ -104,4 +104,8 @@ public class User {
             contacts.set(index, newContact);
         }
     }
+ // Remove contact
+    public boolean deleteContact(Contact contact) {
+        return contacts.remove(contact);
+    }
 }

@@ -51,7 +51,8 @@ public class Main {
                 System.out.println("2. Add Contact");
                 System.out.println("3. View Contact");
                 System.out.println("4. Edit Contact");
-                System.out.println("5. Exit");
+                System.out.println("5. Delete Contact");
+                System.out.println("6. Exit");
                 System.out.print("Choose option: ");
 
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -161,8 +162,39 @@ public class Main {
                         System.out.println("Contact not found.");
                     }
                 }
-
+                // Delete Contact
                 else if (choice == 5) {
+
+                    System.out.print("Enter Contact Name to Delete: ");
+                    String searchName = scanner.nextLine();
+
+                    Contact contact = loggedInUser.getContactByName(searchName);
+
+                    if (contact != null) {
+
+                        System.out.print("Are you sure you want to delete this contact? (yes/no): ");
+                        String confirm = scanner.nextLine();
+
+                        if (confirm.equalsIgnoreCase("yes")) {
+
+                            boolean removed = loggedInUser.deleteContact(contact);
+
+                            if (removed) {
+                                System.out.println("Contact deleted successfully.");
+                            } else {
+                                System.out.println("Deletion failed.");
+                            }
+
+                        } else {
+                            System.out.println("Deletion cancelled.");
+                        }
+
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                }
+
+                else if (choice == 6) {
                     break; // Exit application
                 }
 
