@@ -53,7 +53,8 @@ public class Main {
 				System.out.println("4. Edit Contact");
 				System.out.println("5. Delete Contact");
 				System.out.println("6. Bulk Operations");
-				System.out.println("8. Search Contacts");
+				System.out.println("7. Search Contacts");
+				System.out.println("8. Filter Contacts");
 				System.out.println("9. Exit");
 				System.out.print("Choose option: ");
 
@@ -289,8 +290,49 @@ public class Main {
 						}
 					}
 				}
+				
+				else if (choice == 9) {
 
-				else if (choice == 8) {
+				    System.out.println("Filter by:");
+				    System.out.println("1. Tag");
+				    System.out.println("2. Date Added");
+				    System.out.println("3. Frequently Contacted");
+				    System.out.print("Choose option: ");
+
+				    int filterChoice = Integer.parseInt(scanner.nextLine());
+
+				    ContactFilter filter = null;
+
+				    if (filterChoice == 1) {
+				        System.out.print("Enter tag: ");
+				        String tag = scanner.nextLine();
+				        filter = new FilterByTag(tag);
+				    }
+
+				    else if (filterChoice == 2) {
+				        filter = new FilterByDate();
+				    }
+
+				    else if (filterChoice == 3) {
+				        filter = new FilterByFrequency();
+				    }
+
+				    if (filter != null) {
+
+				        List<Contact> filtered =
+				                filter.filter(loggedInUser.getContacts());
+
+				        if (filtered.isEmpty()) {
+				            System.out.println("No contacts found.");
+				        } else {
+				            for (Contact contact : filtered) {
+				                System.out.println(contact);
+				                System.out.println("----------------");
+				            }
+				        }
+				    }
+				}
+				else if (choice == 9) {
 					break; // Exit application
 				}
 

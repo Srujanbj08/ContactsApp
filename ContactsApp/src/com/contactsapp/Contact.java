@@ -2,8 +2,11 @@ package com.contactsapp;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.time.LocalDateTime;
 
 public class Contact {
+	private LocalDateTime dateAdded;
+	private int contactCount;
 
 	private String contactName;
 	private String phoneNumber;
@@ -12,6 +15,8 @@ public class Contact {
 	public Contact(String contactName, String phoneNumber) {
 		setContactName(contactName);
 		setPhoneNumber(phoneNumber);
+		this.dateAdded = LocalDateTime.now(); // Track creation time
+		this.contactCount = 0; // Initial frequency
 	}
 
 	// Copy constructor
@@ -57,11 +62,22 @@ public class Contact {
 	public Set<String> getTags() {
 		return new HashSet<>(tags);
 	}
+	public LocalDateTime getDateAdded() {
+		return dateAdded;
+	}
+
+	public int getContactCount() {
+		return contactCount;
+	}
+
+	public void incrementContactCount() {
+		contactCount++;
+	}
 
 	@Override
 	public String toString() {
-	    return "Name: " + contactName +
-	           ", Phone: " + phoneNumber +
-	           ", Tags: " + tags;
+		return "Name: " + contactName +
+				", Phone: " + phoneNumber +
+				", Tags: " + tags;
 	}
 }
