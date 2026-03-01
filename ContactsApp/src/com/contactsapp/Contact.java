@@ -26,4 +26,10 @@ public class Contact {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    // Display full contact details
+    @Override
+    public String toString() {
+        return "Contact Name: " + contactName + "\nPhone Number: " + phoneNumber;
+    }
 }

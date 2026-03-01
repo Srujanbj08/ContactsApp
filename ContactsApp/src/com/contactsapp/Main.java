@@ -49,7 +49,8 @@ public class Main {
                 System.out.println("\n=== MAIN MENU ===");
                 System.out.println("1. Profile Management");
                 System.out.println("2. Add Contact");
-                System.out.println("3. Exit");
+                System.out.println("3. View Contact");
+                System.out.println("4. Exit");
                 System.out.print("Choose option: ");
 
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -110,8 +111,23 @@ public class Main {
                         System.out.println("Error: " + e.getMessage()); // Validation error
                     }
                 }
-
+             // View specific contact
                 else if (choice == 3) {
+
+                    System.out.print("Enter Contact Name to View: ");
+                    String searchName = scanner.nextLine();
+
+                    Contact contact = loggedInUser.getContactByName(searchName);
+
+                    if (contact != null) {
+                        System.out.println("\nContact Details:");
+                        System.out.println(contact); // Uses toString()
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                }
+
+                else if (choice == 4) {
                     break; // Exit application
                 }
 

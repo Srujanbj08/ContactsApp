@@ -87,4 +87,13 @@ public class User {
         }
         return sb.toString();
     }
+ // Find contact by name
+    public Contact getContactByName(String name) {
+        for (Contact contact : contacts) {
+            if (contact.getContactName().equalsIgnoreCase(name)) {
+                return contact;
+            }
+        }
+        return null;
+    }
 }
