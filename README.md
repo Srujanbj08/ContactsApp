@@ -1,19 +1,24 @@
-**MyContacts App**
+MyContacts App
 Java Console-Based Contact Management System
-**Overview**
+Overview
+
 MyContacts App is a Java-based console application developed to demonstrate Object-Oriented Programming (OOP) principles and core Java concepts through a contact management system.
 
 The application supports user management, contact operations, tagging, searching, filtering, and bulk processing.
 
 Features
-**User Management**
+User Management
+
 User Registration with email validation
 
 Secure password hashing (SHA-256)
 
-User Login & Profile Management
+User Login
 
-**Contact Management**
+Profile Management
+
+Contact Management
+
 Add new contacts
 
 View contact details
@@ -22,25 +27,32 @@ Edit contact information
 
 Delete contacts (with confirmation)
 
-Bulk delete, bulk tag, export contacts
+Bulk delete
 
-**Tag Management**
+Bulk tag
+
+Export contacts
+
+Tag Management
+
 Create custom tags
 
-Apply single or multiple tags to contacts
+Apply single or multiple tags
 
 Remove tags from contacts
 
 Unique tag handling using Set
 
-**Search & Filter**
+Search & Filter
+
 Search by name, phone, or tag
 
 Filter by tag, date added, frequently contacted
 
 Sorting using Comparator
 
-**OOP Concepts Used**
+OOP Concepts Used
+
 Encapsulation – Private fields with validation methods
 
 Inheritance – Contact hierarchy (Person / Organization)
@@ -49,7 +61,8 @@ Polymorphism – Search and Filter implementations
 
 Abstraction – Interfaces for search and filtering
 
-**Core Java Concepts Used**
+Core Java Concepts Used
+
 Collections (List, Set)
 
 Streams & Lambda Expressions
@@ -66,7 +79,7 @@ Regular expressions for validation
 
 MessageDigest for password hashing
 
-**Relationships**
+Relationships
 
 User manages multiple Contacts
 
@@ -74,7 +87,7 @@ Contact has multiple Tags (many-to-many relationship)
 
 Contact contains PhoneNumber and Email objects
 
-**How to Run**
+How to Run
 
 Open project in Eclipse / IntelliJ
 
@@ -82,7 +95,7 @@ Run Main.java
 
 Follow console prompts
 
-**Purpose**
+Purpose
 
 This project demonstrates practical implementation of:
 
