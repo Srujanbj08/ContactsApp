@@ -11,7 +11,7 @@ public class Contact {
 	private String contactName;
 	private String phoneNumber;
 
-	private Set<Tag> tags = new HashSet<>();  // Keep only this one
+	private Set<Tag> tags = new HashSet<>();
 
 	// Constructor
 	public Contact(String contactName, String phoneNumber) {
@@ -30,7 +30,7 @@ public class Contact {
 		this.tags = new HashSet<>(other.tags);
 	}
 
-	// Getter methods
+	// Getters
 	public String getContactName() {
 		return contactName;
 	}
@@ -47,7 +47,11 @@ public class Contact {
 		return contactCount;
 	}
 
-	// Setter with validation
+	public Set<Tag> getTags() {
+		return new HashSet<>(tags);
+	}
+
+	// Setters with validation
 	public void setContactName(String contactName) {
 		if (contactName == null || contactName.trim().isEmpty()) {
 			throw new IllegalArgumentException("Contact name cannot be empty.");
@@ -62,21 +66,25 @@ public class Contact {
 		this.phoneNumber = phoneNumber;
 	}
 
-	// Add tag
+	// Add single tag
 	public void addTag(Tag tag) {
-	    if (tag != null) {
-	        tags.add(tag);
-	    }
+		if (tag != null) {
+			tags.add(tag);
+		}
 	}
 
-	// Remove tag
+	// Remove single tag
 	public void removeTag(Tag tag) {
-	    tags.remove(tag);
+		tags.remove(tag);
 	}
 
-	// Get tags
-	public Set<Tag> getTags() {
-	    return new HashSet<>(tags);
+	// Add multiple tags
+	public void addTags(Set<Tag> tagSet) {
+		if (tagSet != null) {
+			for (Tag tag : tagSet) {
+				tags.add(tag);
+			}
+		}
 	}
 
 	public void incrementContactCount() {

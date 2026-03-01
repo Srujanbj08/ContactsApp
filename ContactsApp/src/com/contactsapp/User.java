@@ -37,16 +37,53 @@ public class User {
 		contacts.add(contact);
 	}
 
-	// CREATE TAG
+	// Create tag
 	public Tag createTag(String tagName) {
 		Tag tag = new Tag(tagName);
-		userTags.add(tag);   // Set ensures uniqueness
+		userTags.add(tag);
 		return tag;
 	}
 
-	//  GET ALL TAGS
+	// Get all user tags
 	public Set<Tag> getUserTags() {
-		return new HashSet<>(userTags); // defensive copy
+		return new HashSet<>(userTags);
+	}
+
+	// Apply multiple tags to a contact
+	public void applyTagsToContact(String contactName, List<String> tagNames) {
+
+		Contact contact = getContactByName(contactName);
+
+		if (contact != null) {
+
+			for (String tagName : tagNames) {
+
+				Tag tag = createTag(tagName.trim());
+				contact.addTag(tag);
+			}
+
+			System.out.println("Tags applied successfully.");
+
+		} else {
+			System.out.println("Contact not found.");
+		}
+	}
+
+	// Remove tag from contact
+	public void removeTagFromContact(String contactName, String tagName) {
+
+		Contact contact = getContactByName(contactName);
+
+		if (contact != null) {
+
+			Tag tempTag = new Tag(tagName);
+			contact.removeTag(tempTag);
+
+			System.out.println("Tag removed successfully.");
+
+		} else {
+			System.out.println("Contact not found.");
+		}
 	}
 
 	public void setName(String name) {

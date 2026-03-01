@@ -339,40 +339,64 @@ public class Main {
 				else if (choice == 9) {
 
 					System.out.println("1. Create Tag");
-					System.out.println("2. Assign Tag to Contact");
+					System.out.println("2. Assign Single Tag to Contact");
+					System.out.println("3. Assign Multiple Tags to Contact");
+					System.out.println("4. Remove Tag from Contact");
 					System.out.print("Choose option: ");
 
 					int tagChoice = Integer.parseInt(scanner.nextLine());
 
+					// Create tag
 					if (tagChoice == 1) {
 
 						System.out.print("Enter Tag Name: ");
-						String tagName = scanner.nextLine();
-
-						loggedInUser.createTag(tagName);
+						loggedInUser.createTag(scanner.nextLine());
 						System.out.println("Tag created successfully.");
 					}
 
+					// Assign single tag
 					else if (tagChoice == 2) {
 
 						System.out.print("Enter Contact Name: ");
 						String contactName = scanner.nextLine();
 
+						System.out.print("Enter Tag Name: ");
+						String tagName = scanner.nextLine();
+
+						Tag tag = loggedInUser.createTag(tagName);
 						Contact contact = loggedInUser.getContactByName(contactName);
 
 						if (contact != null) {
-
-							System.out.print("Enter Tag Name: ");
-							String tagName = scanner.nextLine();
-
-							Tag tag = loggedInUser.createTag(tagName); // ensures uniqueness
 							contact.addTag(tag);
-
-							System.out.println("Tag assigned successfully.");
-
+							System.out.println("Tag assigned.");
 						} else {
 							System.out.println("Contact not found.");
 						}
+					}
+
+					// Assign multiple tags
+					else if (tagChoice == 3) {
+
+						System.out.print("Enter Contact Name: ");
+						String contactName = scanner.nextLine();
+
+						System.out.print("Enter Tags separated by comma: ");
+						List<String> tagNames =
+								List.of(scanner.nextLine().split(","));
+
+						loggedInUser.applyTagsToContact(contactName, tagNames);
+					}
+
+					// Remove tag
+					else if (tagChoice == 4) {
+
+						System.out.print("Enter Contact Name: ");
+						String contactName = scanner.nextLine();
+
+						System.out.print("Enter Tag Name to Remove: ");
+						String tagName = scanner.nextLine();
+
+						loggedInUser.removeTagFromContact(contactName, tagName);
 					}
 				}
 
