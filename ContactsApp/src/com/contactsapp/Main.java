@@ -2,47 +2,56 @@ package com.contactsapp;
 
 import java.util.Scanner;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        // Input object
+        // Scanner for input
         Scanner scanner = new Scanner(System.in);
 
-        // Service object
-        RegistrationService service = new RegistrationService();
+        // List to store users
+        List<User> registeredUsers = new ArrayList<>();
 
-        try {
-            // Title
-            System.out.println("=== User Registration ===");
+        // Registration (UC-01)
+        System.out.println("=== REGISTER FIRST ===");
+        System.out.print("Enter Name: ");
+        String name = scanner.nextLine();
 
-            // Get name
-            System.out.print("Enter Name: ");
-            String name = scanner.nextLine();
+        System.out.print("Enter Email: ");
+        String email = scanner.nextLine();
 
-            // Get email
-            System.out.print("Enter Email: ");
-            String email = scanner.nextLine();
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
 
-            // Get password
-            System.out.print("Enter Password: ");
-            String password = scanner.nextLine();
+        // Add new user
+        registeredUsers.add(new User(name, email, password));
+        System.out.println("Registration Successful!\n");
 
-            // Register user
-            User user = service.registerUser(name, email, password);
+        // Login (UC-02)
+        LoginService loginService = new LoginService(registeredUsers);
+        SessionManager session = new SessionManager();
 
-            // Success message
-            System.out.println("\nRegistration Successful!");
-            System.out.println("Name: " + user.getName());
-            System.out.println("Email: " + user.getEmail());
-            System.out.println("Password Hash: " + user.getPasswordHash());
+        System.out.println("=== LOGIN ===");
+        System.out.print("Enter Email: ");
+        String loginEmail = scanner.nextLine();
 
-        } catch (Exception e) {
-            // Error message
-            System.out.println("Registration Failed: " + e.getMessage());
+        System.out.print("Enter Password: ");
+        String loginPassword = scanner.nextLine();
+
+        // Check login
+        User loggedInUser = loginService.login(loginEmail, loginPassword);
+
+        if (loggedInUser != null) {
+            session.startSession(loggedInUser); // Start session
+        } else {
+            System.out.println("Invalid Email or Password!"); // Error message
         }
 
-        // Close input
+        // Close scanner
         scanner.close();
     }
-} 
+}
