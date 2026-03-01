@@ -9,6 +9,7 @@ MyContacts App is a Java-based console application developed to demonstrate Obje
 The application supports user management, contact operations, tagging, searching, filtering, and bulk processing.
 
 🚀 Features
+
 👤 User Management
 
 User Registration with email validation
