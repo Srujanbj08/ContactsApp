@@ -55,7 +55,8 @@ public class Main {
 				System.out.println("6. Bulk Operations");
 				System.out.println("7. Search Contacts");
 				System.out.println("8. Filter Contacts");
-				System.out.println("9. Exit");
+				System.out.println("9. Manage Tags");
+				System.out.println("10. Exit");
 				System.out.print("Choose option: ");
 
 				int choice = Integer.parseInt(scanner.nextLine());
@@ -219,16 +220,19 @@ public class Main {
 					// Bulk Tag
 					else if (bulkChoice == 2) {
 
-						System.out.print("Enter contact names separated by comma: ");
-						String input = scanner.nextLine();
-						List<String> names = List.of(input.split(","));
+						System.out.print("Enter names separated by comma: ");
+						List<String> names =
+								List.of(scanner.nextLine().split(","));
 
 						System.out.print("Enter tag: ");
-						String tag = scanner.nextLine();
+						String tagName = scanner.nextLine();
 
-						loggedInUser.bulkTag(names, tag);
+						Tag tagObj = new Tag(tagName);  // FIXED
+						loggedInUser.bulkTag(names, tagObj);
+
 						System.out.println("Tag added to selected contacts.");
 					}
+
 
 					// Export Contacts
 					else if (bulkChoice == 3) {
@@ -290,49 +294,89 @@ public class Main {
 						}
 					}
 				}
-				
-				else if (choice == 9) {
 
-				    System.out.println("Filter by:");
-				    System.out.println("1. Tag");
-				    System.out.println("2. Date Added");
-				    System.out.println("3. Frequently Contacted");
-				    System.out.print("Choose option: ");
+				else if (choice == 8) {
 
-				    int filterChoice = Integer.parseInt(scanner.nextLine());
+					System.out.println("Filter by:");
+					System.out.println("1. Tag");
+					System.out.println("2. Date Added");
+					System.out.println("3. Frequently Contacted");
+					System.out.print("Choose option: ");
 
-				    ContactFilter filter = null;
+					int filterChoice = Integer.parseInt(scanner.nextLine());
 
-				    if (filterChoice == 1) {
-				        System.out.print("Enter tag: ");
-				        String tag = scanner.nextLine();
-				        filter = new FilterByTag(tag);
-				    }
+					ContactFilter filter = null;
 
-				    else if (filterChoice == 2) {
-				        filter = new FilterByDate();
-				    }
+					if (filterChoice == 1) {
+						System.out.print("Enter tag: ");
+						String tag = scanner.nextLine();
+						filter = new FilterByTag(tag);
+					}
 
-				    else if (filterChoice == 3) {
-				        filter = new FilterByFrequency();
-				    }
+					else if (filterChoice == 2) {
+						filter = new FilterByDate();
+					}
 
-				    if (filter != null) {
+					else if (filterChoice == 3) {
+						filter = new FilterByFrequency();
+					}
 
-				        List<Contact> filtered =
-				                filter.filter(loggedInUser.getContacts());
+					if (filter != null) {
 
-				        if (filtered.isEmpty()) {
-				            System.out.println("No contacts found.");
-				        } else {
-				            for (Contact contact : filtered) {
-				                System.out.println(contact);
-				                System.out.println("----------------");
-				            }
-				        }
-				    }
+						List<Contact> filtered =
+								filter.filter(loggedInUser.getContacts());
+
+						if (filtered.isEmpty()) {
+							System.out.println("No contacts found.");
+						} else {
+							for (Contact contact : filtered) {
+								System.out.println(contact);
+								System.out.println("----------------");
+							}
+						}
+					}
 				}
 				else if (choice == 9) {
+
+					System.out.println("1. Create Tag");
+					System.out.println("2. Assign Tag to Contact");
+					System.out.print("Choose option: ");
+
+					int tagChoice = Integer.parseInt(scanner.nextLine());
+
+					if (tagChoice == 1) {
+
+						System.out.print("Enter Tag Name: ");
+						String tagName = scanner.nextLine();
+
+						loggedInUser.createTag(tagName);
+						System.out.println("Tag created successfully.");
+					}
+
+					else if (tagChoice == 2) {
+
+						System.out.print("Enter Contact Name: ");
+						String contactName = scanner.nextLine();
+
+						Contact contact = loggedInUser.getContactByName(contactName);
+
+						if (contact != null) {
+
+							System.out.print("Enter Tag Name: ");
+							String tagName = scanner.nextLine();
+
+							Tag tag = loggedInUser.createTag(tagName); // ensures uniqueness
+							contact.addTag(tag);
+
+							System.out.println("Tag assigned successfully.");
+
+						} else {
+							System.out.println("Contact not found.");
+						}
+					}
+				}
+
+				else if (choice == 10) {
 					break; // Exit application
 				}
 

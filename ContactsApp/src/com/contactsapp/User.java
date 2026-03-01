@@ -3,81 +3,81 @@ package com.contactsapp;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class User {
 
-	// User fields
 	private String name;
 	private String email;
 	private String passwordHash;
 
-	// Contact list
 	private List<Contact> contacts;
 
-	// Constructor
-	public User(String name, String email, String password) throws NoSuchAlgorithmException {
+	// Store unique user tags
+	private Set<Tag> userTags = new HashSet<>();
+
+	public User(String name, String email, String password)
+			throws NoSuchAlgorithmException {
+
 		this.contacts = new ArrayList<>();
 		setName(name);
 		setEmail(email);
 		setPassword(password);
 	}
 
-	// Getters
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
+	public String getEmail() { return email; }
+	public String getPasswordHash() { return passwordHash; }
+	public List<Contact> getContacts() { return contacts; }
 
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public List<Contact> getContacts() {
-		return contacts;
-	}
-
-	// Add contact
 	public void addContact(Contact contact) {
 		contacts.add(contact);
 	}
 
-	// Update name
+	// CREATE TAG
+	public Tag createTag(String tagName) {
+		Tag tag = new Tag(tagName);
+		userTags.add(tag);   // Set ensures uniqueness
+		return tag;
+	}
+
+	//  GET ALL TAGS
+	public Set<Tag> getUserTags() {
+		return new HashSet<>(userTags); // defensive copy
+	}
+
 	public void setName(String name) {
-		if (name == null || name.trim().isEmpty()) {
+		if (name == null || name.trim().isEmpty())
 			throw new IllegalArgumentException("Name cannot be empty.");
-		}
 		this.name = name;
 	}
 
-	// Update email
 	public void setEmail(String email) {
-		if (!isValidEmail(email)) {
+		if (!isValidEmail(email))
 			throw new IllegalArgumentException("Invalid email format.");
-		}
 		this.email = email;
 	}
 
-	// Update password
-	public void setPassword(String newPassword) throws NoSuchAlgorithmException {
-		if (newPassword.length() < 6) {
+	public void setPassword(String newPassword)
+			throws NoSuchAlgorithmException {
+
+		if (newPassword.length() < 6)
 			throw new IllegalArgumentException("Password must be at least 6 characters.");
-		}
+
 		this.passwordHash = hashPassword(newPassword);
 	}
 
-	// Email validation
 	private boolean isValidEmail(String email) {
 		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 		return Pattern.matches(regex, email);
 	}
 
-	// Hash password
-	private String hashPassword(String password) throws NoSuchAlgorithmException {
+	private String hashPassword(String password)
+			throws NoSuchAlgorithmException {
+
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		byte[] hashBytes = md.digest(password.getBytes());
 
@@ -87,38 +87,35 @@ public class User {
 		}
 		return sb.toString();
 	}
-	// Find contact by name
+
 	public Contact getContactByName(String name) {
-		for (Contact contact : contacts) {
-			if (contact.getContactName().equalsIgnoreCase(name)) {
-				return contact;
-			}
+		for (Contact c : contacts) {
+			if (c.getContactName().equalsIgnoreCase(name))
+				return c;
 		}
 		return null;
 	}
 
-	// Replace old contact with updated contact
 	public void updateContact(Contact oldContact, Contact newContact) {
 		int index = contacts.indexOf(oldContact);
 		if (index != -1) {
 			contacts.set(index, newContact);
 		}
 	}
-	// Remove contact
+
 	public boolean deleteContact(Contact contact) {
 		return contacts.remove(contact);
 	}
-	// Bulk delete by names
+
 	public void bulkDelete(List<String> names) {
-		contacts.removeIf(contact ->
-		names.contains(contact.getContactName()));
+		contacts.removeIf(c ->
+			names.contains(c.getContactName()));
 	}
 
-	// Bulk tag contacts
-	public void bulkTag(List<String> names, String tag) {
-		for (Contact contact : contacts) {
-			if (names.contains(contact.getContactName())) {
-				contact.addTag(tag);
+	public void bulkTag(List<String> names, Tag tag) {
+		for (Contact c : contacts) {
+			if (names.contains(c.getContactName())) {
+				c.addTag(tag);
 			}
 		}
 	}

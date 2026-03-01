@@ -5,24 +5,29 @@ import java.util.Set;
 import java.time.LocalDateTime;
 
 public class Contact {
+
 	private LocalDateTime dateAdded;
 	private int contactCount;
-
 	private String contactName;
 	private String phoneNumber;
+
+	private Set<Tag> tags = new HashSet<>();  // Keep only this one
 
 	// Constructor
 	public Contact(String contactName, String phoneNumber) {
 		setContactName(contactName);
 		setPhoneNumber(phoneNumber);
-		this.dateAdded = LocalDateTime.now(); // Track creation time
-		this.contactCount = 0; // Initial frequency
+		this.dateAdded = LocalDateTime.now();
+		this.contactCount = 0;
 	}
 
 	// Copy constructor
 	public Contact(Contact other) {
 		this.contactName = other.contactName;
 		this.phoneNumber = other.phoneNumber;
+		this.dateAdded = other.dateAdded;
+		this.contactCount = other.contactCount;
+		this.tags = new HashSet<>(other.tags);
 	}
 
 	// Getter methods
@@ -34,6 +39,14 @@ public class Contact {
 		return phoneNumber;
 	}
 
+	public LocalDateTime getDateAdded() {
+		return dateAdded;
+	}
+
+	public int getContactCount() {
+		return contactCount;
+	}
+
 	// Setter with validation
 	public void setContactName(String contactName) {
 		if (contactName == null || contactName.trim().isEmpty()) {
@@ -42,32 +55,28 @@ public class Contact {
 		this.contactName = contactName;
 	}
 
-	// Setter with validation
 	public void setPhoneNumber(String phoneNumber) {
 		if (phoneNumber == null || !phoneNumber.matches("\\d{10}")) {
 			throw new IllegalArgumentException("Phone number must be 10 digits.");
 		}
 		this.phoneNumber = phoneNumber;
 	}
-	private Set<String> tags = new HashSet<>();
 
 	// Add tag
-	public void addTag(String tag) {
-		if (tag != null && !tag.trim().isEmpty()) {
-			tags.add(tag);
-		}
+	public void addTag(Tag tag) {
+	    if (tag != null) {
+	        tags.add(tag);
+	    }
+	}
+
+	// Remove tag
+	public void removeTag(Tag tag) {
+	    tags.remove(tag);
 	}
 
 	// Get tags
-	public Set<String> getTags() {
-		return new HashSet<>(tags);
-	}
-	public LocalDateTime getDateAdded() {
-		return dateAdded;
-	}
-
-	public int getContactCount() {
-		return contactCount;
+	public Set<Tag> getTags() {
+	    return new HashSet<>(tags);
 	}
 
 	public void incrementContactCount() {
