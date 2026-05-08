@@ -1,103 +1,97 @@
-📱 MyContacts App
+# MyContacts App
 
-Java Console-Based Contact Management System
+MyContacts App is a Java-based console application designed to demonstrate Object-Oriented Programming (OOP), design patterns, and Core Java concepts through a real-world contact management system. The application supports user management, contact handling, searching, filtering, tagging, and bulk operations using modular use-case-driven development. 
 
-📌 Overview
+---
 
-MyContacts App is a Java-based console application developed to demonstrate Object-Oriented Programming (OOP) principles and core Java concepts through a contact management system.
+## Features
 
-The application supports user management, contact operations, tagging, searching, filtering, and bulk processing.
+* User registration and authentication
+* Profile management
+* Create, edit, and delete contacts
+* Person and organization contact support
+* Tagging and contact grouping
+* Advanced search and filtering
+* Bulk contact operations
+* Undo/Redo functionality
+* Decorator-based contact display formatting
 
-🚀 Features
+---
 
-👤 User Management
+## Concepts Covered
 
-User Registration with email validation
+* Encapsulation, Inheritance, Polymorphism
+* Abstraction and Composition
+* Collections Framework
+* Stream API and Lambda Expressions
+* Optional and UUID
+* Exception Handling
+* Date & Time API
+* Functional Interfaces
 
-Secure password hashing (SHA-256)
+---
 
-User Login & Profile Management
+## Design Patterns Used
 
-📇 Contact Management
+* Factory Pattern
+* Builder Pattern
+* Singleton Pattern
+* Strategy Pattern
+* Decorator Pattern
+* Composite Pattern
+* Observer Pattern
+* Command Pattern
+* Memento Pattern
+* Specification Pattern
+* Chain of Responsibility
 
-Add new contacts
+---
 
-View contact details
+## Modules / Use Cases
 
-Edit contact information
+* User Registration & Login
+* Profile Management
+* Contact Creation & Editing
+* Contact Search & Filtering
+* Tagging & Group Management
+* Bulk Operations
+* Contact Display Formatting
 
-Delete contacts (with confirmation)
+---
 
-Bulk delete, bulk tag, export contacts
+## Tech Stack
 
-🏷 Tag Management
+* Java
+* Collections Framework
+* Stream API
+* OOP Concepts
+* Design Patterns
 
-Create custom tags
+---
 
-Apply single or multiple tags to contacts
+## Setup
 
-Remove tags from contacts
+Compile the project:
 
-Unique tag handling using Set
+```bash id="4br2ef"
+javac *.java
+```
 
-🔎 Search & Filter
+Run the application:
 
-Search by name, phone, or tag
+```bash id="3xk7kv"
+java Main
+```
 
-Filter by tag, date added, frequently contacted
+---
 
-Sorting using Comparator
+## Key Highlights
 
-🧱 OOP Concepts Used
+* Real-world contact management simulation
+* Modular and scalable architecture
+* Extensive use of Java design patterns
+* Educational implementation of OOP concepts
+* Functional and collection-based processing
 
-Encapsulation – Private fields with validation methods
+---
 
-Inheritance – Contact hierarchy (Person / Organization)
-
-Polymorphism – Search and Filter implementations
-
-Abstraction – Interfaces for search and filtering
-
-💻 Core Java Concepts Used
-
-Collections (List, Set)
-
-Streams & Lambda Expressions
-
-LocalDateTime (Date & Time API)
-
-Optional for null handling
-
-UUID for unique IDs
-
-Exception handling
-
-Regular expressions for validation
-
-MessageDigest for password hashing
-
-🔗 Relationships
-
-User manages multiple Contacts
-
-Contact has multiple Tags (many-to-many relationship)
-
-Contact contains PhoneNumber and Email objects
-
-▶️ How to Run
-
-Open project in Eclipse / IntelliJ
-
-Run Main.java
-
-Follow console prompts
-
-🎓 Purpose
-
-This project demonstrates practical implementation of:
-
-Object-Oriented Programming
-
-Java Collections Framework
-
-Modular use-case based development
